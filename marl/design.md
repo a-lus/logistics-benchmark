@@ -50,3 +50,12 @@ delay^2/max_delay^2
 
 Q: how to assess max_delay?
 
+
+# Digital twin
+
+Function:
+
+- copy sim at current state
+- input: task is assigned to the agent
+- return: delay after task is completed
+

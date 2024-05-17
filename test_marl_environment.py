@@ -1,14 +1,11 @@
-import datetime
 import os
-import random
 
 import numpy as np
-from gymnasium.spaces import Box
 import matplotlib.pyplot as plt
 
 from marl.marl_environment import MARLEnv
 
-EP_LEN = 1000
+EP_LEN = 50
 experiment_name = "LogisticsBenchmarkEnvironmentTest"
 LOG_DIR = "~/ray_results"
 CONFIG_FILE = os.getcwd() + "/maps/01_plant/01_plant.json"
@@ -18,16 +15,17 @@ env_config = {
         "ep_len": EP_LEN,  # number of steps = tasks per episode
         "max_queue_length": 10,
         "verbose": True,
-        # "shared_reward": True,
+        "shared_reward": True,
         "log_dir": LOG_DIR,
         "experiment_name": experiment_name,
+        "env_metrics": True
     }
 
 env = MARLEnv(env_config)
 
 env.reset()
 
-for i in range(EP_LEN):
+for i in range(2*EP_LEN):
     act_dict = {}
     # sample random actions for all agents
     for agent_id in env.get_agent_ids():
@@ -64,6 +62,6 @@ for i in range(EP_LEN):
         # Display the plot
         plt.show()
 
-        print(delays)
+        # print(delays)
 
         env.reset()

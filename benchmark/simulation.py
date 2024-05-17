@@ -229,8 +229,8 @@ class Simulation():
                 self.env.agents[i].target = self.agvs[i].task_in_work.drop_off
                 self.env.agents[i].state = TrainState.WAITING
                 self.recalculate = True
-                print(
-                    f"--Agent {i} is at pick up, new target: {self.env.agents[i].target}--")
+                # print(
+                #     f"--Agent {i} is at pick up, new target: {self.env.agents[i].target}--")
 
         # if at drop_off - task completed, set task_in_work to None
         for i in range(len(self.env.agents)):
@@ -238,8 +238,8 @@ class Simulation():
                 self.agvs[i].delays.append(self.env._elapsed_steps - self.agvs[i].task_in_work.deadline)
                 self.agvs[i].task_in_work = None
                 self.tasks_executed += 1
-                print(
-                    f"--Agent {i} is at drop off.--")
+                # print(
+                #     f"--Agent {i} is at drop off.--")
 
     def generate_tasks(self):
         # generate tasks
@@ -247,8 +247,8 @@ class Simulation():
             while self.env._elapsed_steps == tg.get_tick_next():
                 task = tg.generate_task()
                 self.releaser.add_task(task)
-                print(
-                    f"----NEW TASK GENERATED: ({task.pick_up}, {task.drop_off}, {task.deadline})----")
+                # print(
+                #     f"----NEW TASK GENERATED: ({task.pick_up}, {task.drop_off}, {task.deadline})----")
 
     def dispatch_tasks(self, tasks):
         for task in tasks:
@@ -264,8 +264,8 @@ class Simulation():
                 self.agvs[i].start_next_task()
                 self.env.agents[i].target = self.agvs[i].task_in_work.pick_up
                 self.recalculate = True
-                print(
-                    f"--New task is being assigned to agent {i}. Agent {i}  has new target: {self.env.agents[i].target}--")
+                # print(
+                #     f"--New task is being assigned to agent {i}. Agent {i}  has new target: {self.env.agents[i].target}--")
                 # if agent has no task in work and no task in queue, new target = closest safe_space
             elif len(self.agvs[i].tasks) == 0 and self.agvs[i].task_in_work == None and self.agvs[i].going_to_safe_space == False:
                 # find closest safe space
@@ -290,11 +290,11 @@ class Simulation():
                         self.env.agents[i].target = self.layout.safe_spaces[safe_space_index]
                         self.agvs[i].going_to_safe_space = True
                         self.recalculate = True
-                        print(
-                            f"--Agv {i} has no task, going to safe space.--")
-                        print(
-                            f"Distances to safe spaces: {distance_to_safe_space}, min distance: {min_dist}, closest indices: {closest_safe_space_indices}, chosen index: {safe_space_index}")
-                        print("---------")
+                        # print(
+                        #     f"--Agv {i} has no task, going to safe space.--")
+                        # print(
+                        #     f"Distances to safe spaces: {distance_to_safe_space}, min distance: {min_dist}, closest indices: {closest_safe_space_indices}, chosen index: {safe_space_index}")
+                        # print("---------")
 
         #  recalculate if there is new target
         if self.recalculate:
@@ -302,8 +302,8 @@ class Simulation():
                 self.env.agents[i].initial_position = self.env.agents[i].position
                 self.env.agents[i].initial_direction = self.env.agents[i].direction
                 self.env.agents[i].state = TrainState.WAITING
-            print()
-            print("---recalculating---")
+            # print()
+            # print("---recalculating---")
             self.plan = self.planner.plan()
             self.runtime += self.planner.get_runtime()
             self.number_of_replannings += 1
@@ -350,13 +350,13 @@ class Simulation():
 
         # Print agent positions and first 5 steps of plan (including current position)
         for i in range(len(self.env.agents)):
-            print(
-                f"Agent {i} position: {self.env.agents[i].position}, target: {self.env.agents[i].target}, orientation: {self.env.agents[i].direction}, action: {actions[i]}, state: {self.env.agents[i].state}, and plan: {self.plan[i][:10]}")
+            # print(
+            #     f"Agent {i} position: {self.env.agents[i].position}, target: {self.env.agents[i].target}, orientation: {self.env.agents[i].direction}, action: {actions[i]}, state: {self.env.agents[i].state}, and plan: {self.plan[i][:10]}")
             if len(self.plan[i]) > 0:
                 if self.plan[i][0] != (-1, 7):
                     if self.env.agents[i].position != self.plan[i][0]:
                         pass
-        print()
+        # print()
         self.plan = [row[1:] if len(
             row) > 0 else row for row in self.plan]
 

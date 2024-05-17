@@ -33,6 +33,7 @@ class LBCallbacks(DefaultCallbacks):
         # print(base_env.num_envs)
         # print(dir(episode))
         episode.custom_metrics["sim_iterations"] = base_env.envs[0].get_sim_iterations()
+        # episode.custom_metrics["sim_iterations_per_task"] = base_env.envs[0].get_sim_iterations_per_task()
         # input("Press Enter to continue...")
     
 

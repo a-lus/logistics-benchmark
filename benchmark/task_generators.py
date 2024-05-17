@@ -93,6 +93,6 @@ class TaskGeneratorPoisson(TaskGenerator):
         if self.env._elapsed_steps <= 1 and self.tick_next == 0:
             self.tick_next = int(np.random.exponential(self.average_tick_next))
 
-        print(f"--TaskGeneratorPoisson tick_next: {self.tick_next}.--")
+        # print(f"--TaskGeneratorPoisson tick_next: {self.tick_next}.--")
 
         return self.tick_next
